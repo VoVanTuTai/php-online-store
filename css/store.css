@@ -1,0 +1,321 @@
+ /* Custom styles */
+ * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 1.6;
+    
+    background-color: #f8f8f8;
+}
+#main_store
+{
+    background-color: #f8f8f8;
+    width: 100%;
+    height: 2000px;
+}
+#hienthisanpham
+{
+    width: 60%;
+    float: left;
+}
+#right
+{
+    width: 40%;
+    float: right;
+}
+.sanpham {
+    width: 200px;
+    height: 300px;
+    background: white;
+    padding: 10px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 10px;
+    float: left;
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+.sanpham:hover {
+    transform: translateY(-10px); /* Di chuyển lên 10px */
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3); /* Tăng độ bóng */
+}
+
+.tensanpham {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.giasanpham {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+.sanpham-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+.img-full {
+    height: 100%;
+    width: 100%;
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+.dropdown-menu a:hover {
+    background-color: rgba(255, 192, 203, 0.755);
+    /* Màu nền khi hover vào dropdown item */
+}
+
+.fa-calendar-days {
+    color: black;
+}
+
+.fa-facebook {
+    color: blue;
+}
+
+.fa-instagram {
+    color: red;
+}
+
+.fa-tiktok {
+    color: black;
+}
+
+.fa-youtube {
+    color: red;
+}
+
+.fa-users {
+    color: green;
+}
+
+.fa-cart-shopping {
+    color: orangered;
+
+}
+
+.fa-right-to-bracket {
+    color: #0099e5;
+}
+
+.fa-right-from-bracket {
+    color: #0099e5;
+}
+
+.fa-key {
+    color: orangered;
+}
+
+.fa-bolt {
+    color: orangered;
+}
+
+#top-header .fab {
+    font-size: 20px;
+}
+/* foooter */
+#footer {
+    background-color: rgba(20, 138, 2, 0.851);
+    padding: 15px 15px;
+    color: black;
+    text-align: justify;
+}
+
+#footer .fa-solid {
+    color: white;
+}
+
+#footer a {
+    color: #000;
+}
+
+#footer-main {
+    padding: 30px 0;
+    margin: 0 -15px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#footer-bottom {
+    display: flex;
+    border-top: 1px solid #333;
+    align-items: center;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #000;
+}
+
+.contact-icon {
+    display: inline-block;
+
+    color: #e8bd72;
+}
+
+.contact-detail {
+    padding-left: 25px;
+}
+
+.contact-detail>a {
+    color: #aaa;
+}
+
+.cty-name>a {
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+/* CSS để canh giữa các biểu tượng font-awesome */
+#dichvucongty .fa-solid {
+    font-size: 48px;
+    /* Điều chỉnh kích thước của biểu tượng */
+    display: block;
+    margin: 0 auto;
+    /* Canh giữa biểu tượng */
+    margin-bottom: 20px;
+    /* Khoảng cách dưới biểu tượng */
+}
+
+/* Định dạng màu cho các biểu tượng font-awesome */
+.fa-truck-fast {
+    color: #4CAF50;
+    /* Màu xanh lá cây */
+}
+
+.fa-headset {
+    color: #FFC107;
+    /* Màu vàng */
+}
+
+.fa-medal {
+    color: #FF5722;
+    /* Màu cam đậm */
+}
+
+.fa-ticket {
+    color: #FF3D00;
+    /* Màu đỏ */
+}
+
+
+/* CSS để thêm hiệu ứng cho card */
+#dichvucongty .card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* Đổ bóng card */
+    border-radius: 10px;
+    /* Bo góc card */
+    transition: all 0.3s ease;
+    /* Hiệu ứng chuyển động */
+    height: 100%;
+}
+
+#dichvucongty .card:hover {
+    transform: translateY(-5px);
+    /* Di chuyển card lên trên khi rê chuột */
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    /* Tăng độ đậm của đổ bóng */
+}
+
+#dichvucongty .card-body {
+    text-align: center;
+    /* Canh giữa nội dung trong card */
+}
+
+.ten-cty {
+    color: white;
+    font-weight: bolder;
+    font-size: 24px;
+}
+
+/* Main_Store */
+.list-group-item.active {
+    background-color: #136025 !important; /* Màu xanh lá cây */
+    border-color: #28a745 !important;
+    color: white !important;
+}
+section{
+    width: 100%;
+    display: inline-flex;
+}
+#aside h4 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color:rgba(45, 95, 37, 0.851);
+    text-align: center;
+    padding: 15px;
+    border-bottom: 2px dashed white;
+    margin: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+.list-group #category-list-nav{
+    border-radius: 30px;
+}
+.list-group-item{
+    height: inherit;
+}
+.list-group{
+    width: 100%;
+}
+.list-group-item {
+     border: none;
+     color: #333; 
+}
+
+.list-group-item:hover {
+     background-color: #39883e;
+}
+#category-list-nav{
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 3px 3px 10px #6c757d;
+}
+.filterSP{
+    overflow: hidden;
+    width: 100%;
+    padding: 10px;
+}
+
+.pagination {
+    justify-content: center;
+}
+
+.pagination .page-link {
+    color: #28a745; /* Màu xanh lá */
+    border: 1px solid #28a745;
+}
+
+.pagination .page-link:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.pagination .active .page-link {
+    background-color: #157e2f;
+    border-color: #28a745;
+    color: white;
+}
+
+

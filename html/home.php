@@ -1,6 +1,7 @@
 <?php
     include("../class_models/class_control.php");
     $x = new control();
+    $category = isset($_GET['category']) ? $_GET['category'] : null;
 ?>
 <!DOCTYPE html>
 <html lang="en">

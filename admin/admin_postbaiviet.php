@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../html/dangnhap.php");
-    exit();
-}
+require_once __DIR__ . "/../config/auth.php";
+require_admin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +72,7 @@ if (!isset($_SESSION['user_id'])) {
 
                                 $message = $baiviet->postBaiViet($_POST, $_FILES); // Gọi hàm thêm bài viết
 
-                                echo "<script>alert('$message');</script>"; // Hiển thị thông báo
+                                echo "<script>alert(" . json_encode($message, JSON_UNESCAPED_UNICODE) . ");</script>"; // Hiển thị thông báo
                             }
                             ?>
                     </form>

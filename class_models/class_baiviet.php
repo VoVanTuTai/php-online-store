@@ -59,6 +59,8 @@
                 $imagePath = !empty($row['hinhmota']) ? "../images_baiviet/" . htmlspecialchars($row['hinhmota']) : "images_baiviet/default.png";
         
                 // Hiển thị bài viết
+                $safeLink = htmlspecialchars($row['lienket'], ENT_QUOTES, 'UTF-8');
+
                 return '
                 <div class="chitiet-baiviet">
                     <h1>' . htmlspecialchars($row['tieudebaiviet']) . '</h1>
@@ -66,7 +68,7 @@
                     <p>' . nl2br(htmlspecialchars($row['mobai'])) . '</p>
                     <p>' . nl2br(htmlspecialchars($row['thanbai'])) . '</p>
                     <p>' . nl2br(htmlspecialchars($row['ketbai'])) . '
-                    <a href="'.$row['lienket'].'">Tìm hiểu thêm</a></p>
+                    <a href="'.$safeLink.'" target="_blank" rel="noopener noreferrer">Tìm hiểu thêm</a></p>
                     <a href="baiviet.php">⬅ Quay lại danh sách bài viết
                 </div>';
             } else {

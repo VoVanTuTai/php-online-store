@@ -6,6 +6,11 @@
         public function __construct($db) {
             $this->conn = $db->getConnection();
         }
+
+        private function e($value) {
+            return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
+        }
+
         //HÀM POST THÊM SẢN PHẨM
         public function insertSanPham($data, $file) {
             try {
@@ -48,15 +53,21 @@
                 // Xử lý tên file ảnh
                 $fileName = basename($file["hinh_anh"]["name"]);
                 $fileName = preg_replace("/[^a-zA-Z0-9\._-]/", "_", $fileName);
-                $targetFilePath = $targetDir . $fileName;
-                $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
-    
+                $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
                 // Kiểm tra định dạng file ảnh hợp lệ
                 $allowTypes = ['jpg', 'jpeg', 'png', 'gif'];
                 if (!in_array($fileType, $allowTypes)) {
                     return "Chỉ chấp nhận file ảnh có định dạng JPG, JPEG, PNG, GIF.";
                 }
-    
+
+                if (getimagesize($file["hinh_anh"]["tmp_name"]) === false) {
+                    return "File tải lên không phải là ảnh hợp lệ.";
+                }
+
+                $fileName = uniqid("product_", true) . "." . $fileType;
+                $targetFilePath = $targetDir . $fileName;
+
                 // Di chuyển file ảnh đến thư mục đích
                 if (!move_uploaded_file($file["hinh_anh"]["tmp_name"], $targetFilePath)) {
                     return "Lỗi khi tải ảnh lên!";
@@ -97,17 +108,21 @@
             echo '<tbody>';
         
             while ($row = $result->fetch_assoc()) {
+                $idsp = (int) $row['idsp'];
                 echo '<tr>
-                        <td>' . $row['idsp'] . '</td>
-                        <td>' . $row['tensp'] . '</td>
-                        <td>' . $row['loaisp'] . '</td>
+                        <td>' . $idsp . '</td>
+                        <td>' . $this->e($row['tensp']) . '</td>
+                        <td>' . $this->e($row['loaisp']) . '</td>
                         <td>' . number_format($row['gia'], 0, ',', '.') . ' đ</td>
                         <td>' . number_format($row['giamgia'], 0, ',', '.') . ' đ</td>
-                        <td>' . $row['soluongton'] . '</td>
-                        <td>' . $row['daban'] . '</td>
+                        <td>' . (int) $row['soluongton'] . '</td>
+                        <td>' . (int) $row['daban'] . '</td>
                         <td>
-                            <a href="chinhsua_sanpham.php?id=' . $row['idsp'] . '" class="btn btn-sm btn-warning">Chỉnh sửa</a>
-                            <a href="xoa_sanpham.php?id=' . $row['idsp'] . '" class="btn btn-sm btn-danger" onclick="return confirm(\'Bạn có chắc muốn xóa sản phẩm này?\')">Xóa</a>
+                            <a href="chinhsua_sanpham.php?id=' . $idsp . '" class="btn btn-sm btn-warning">Chỉnh sửa</a>
+                            <form method="POST" action="xoa_sanpham.php" style="display:inline" onsubmit="return confirm(\'Bạn có chắc muốn xóa sản phẩm này?\')">
+                                <input type="hidden" name="id" value="' . $idsp . '">
+                                <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
+                            </form>
                         </td>
                       </tr>';
             }
@@ -151,15 +166,21 @@
                 // Xử lý tên file ảnh
                 $fileName = basename($file["hinhmota"]["name"]);
                 $fileName = preg_replace("/[^a-zA-Z0-9\._-]/", "_", $fileName);
-                $targetFilePath = $targetDir . $fileName;
-                $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
-        
+                $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
                 // Kiểm tra định dạng file ảnh hợp lệ
                 $allowTypes = ['jpg', 'jpeg', 'png', 'gif'];
                 if (!in_array($fileType, $allowTypes)) {
                     return "Chỉ chấp nhận file ảnh có định dạng JPG, JPEG, PNG, GIF.";
                 }
-        
+
+                if (getimagesize($file["hinhmota"]["tmp_name"]) === false) {
+                    return "File tải lên không phải là ảnh hợp lệ.";
+                }
+
+                $fileName = uniqid("article_", true) . "." . $fileType;
+                $targetFilePath = $targetDir . $fileName;
+
                 // Di chuyển file ảnh đến thư mục đích
                 if (!move_uploaded_file($file["hinhmota"]["tmp_name"], $targetFilePath)) {
                     return "Lỗi khi tải ảnh lên!";
@@ -205,11 +226,12 @@
         
             while ($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>{$row['iddonhang']}</td>";
-                echo "<td>{$row['hoten']}</td>";
-                echo "<td>{$row['ngaydat']}</td>";
+                $iddonhang = (int) $row['iddonhang'];
+                echo "<td>{$iddonhang}</td>";
+                echo "<td>" . $this->e($row['hoten']) . "</td>";
+                echo "<td>" . $this->e($row['ngaydat']) . "</td>";
                 echo "<td>" . number_format($row['tongtien'], 0, ',', '.') . " đ</td>";
-                echo "<td>{$row['pttt']}</td>";
+                echo "<td>" . $this->e($row['pttt']) . "</td>";
         
                 // Trạng thái đơn hàng
                 echo "<td>";
@@ -219,7 +241,7 @@
                         break;
                     case 'Đã từ chối':
                         echo "<span class='text-danger'>Đã từ chối</span><br>";
-                        echo "<small><strong>Lý do:</strong> " . htmlspecialchars($row['lydo']) . "</small>";
+                        echo "<small><strong>Lý do:</strong> " . $this->e($row['lydo']) . "</small>";
                         break;
                     default:
                         echo "<span class='text-warning'>Chờ xác nhận</span>";
@@ -232,13 +254,13 @@
                     echo "
                         <form method='post' style='display:inline-block; margin-right: 5px;'>
                             <input type='hidden' name='action' value='xacnhan'>
-                            <input type='hidden' name='iddonhang' value='{$row['iddonhang']}'>
+                            <input type='hidden' name='iddonhang' value='{$iddonhang}'>
                             <button type='submit' class='btn btn-success btn-sm'>Xác nhận</button>
                         </form>
         
                         <form method='post' style='display:inline-block;'>
                             <input type='hidden' name='action' value='tuchoi'>
-                            <input type='hidden' name='iddonhang' value='{$row['iddonhang']}'>
+                            <input type='hidden' name='iddonhang' value='{$iddonhang}'>
                             <input type='text' name='lydo' placeholder='Lý do từ chối' required class='form-control form-control-sm mb-1'>
                             <button type='submit' class='btn btn-danger btn-sm'>Từ chối</button>
                         </form>
@@ -262,7 +284,7 @@
                 echo "
                     <form method='post' style='display:inline-block; margin-right: 5px;'>
                         <input type='hidden' name='action' value='capnhatthanhtoan'>
-                        <input type='hidden' name='iddonhang' value='{$row['iddonhang']}'>
+                        <input type='hidden' name='iddonhang' value='{$iddonhang}'>
                         <select name='trangthai_thanhtoan' class='form-select form-select-sm mb-1'>
                             <option value='Chưa thanh toán'" . ($row['trangthai_thanhtoan'] == 'Chưa thanh toán' ? " selected" : "") . ">Chưa thanh toán</option>
                             <option value='Đã thanh toán'" . ($row['trangthai_thanhtoan'] == 'Đã thanh toán' ? " selected" : "") . ">Đã thanh toán</option>

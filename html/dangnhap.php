@@ -8,7 +8,7 @@
     $name = $_POST['name'];
     $password = $_POST['password'];
     $message = $user->loginUser($name, $password);
-    echo "<script>alert('$message');</script>";
+    echo "<script>alert(" . json_encode($message, JSON_UNESCAPED_UNICODE) . ");</script>";
     }
 ?>
 <!DOCTYPE html>

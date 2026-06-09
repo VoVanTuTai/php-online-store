@@ -1,0 +1,43 @@
+services:
+  app:
+    build: .
+    container_name: songtai_shop_app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./config/config.docker.php:/var/www/html/config/config.php:ro
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: songtai_shop_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: songtai_shop
+      MYSQL_USER: songtai_user
+      MYSQL_PASSWORD: songtai_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - songtai_shop_mysql:/var/lib/mysql
+      - ./database:/docker-entrypoint-initdb.d:ro
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: songtai_shop_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
+
+volumes:
+  songtai_shop_mysql:
+

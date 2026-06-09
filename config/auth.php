@@ -26,5 +26,3 @@ function require_admin() {
         exit();
     }
 }
-?>
-

@@ -77,3 +77,6 @@ http://localhost/php-online-store/admin/admin.php
 
 This repository does not commit `config/config.php` because it contains local database credentials. Use `config/config.example.php` as the template.
 
+## Branch Workflow
+
+This repository follows a lightweight Git Flow with `main`, `develop`, `feature/*`, `release/*`, and `hotfix/*` branches. See [docs/git-flow.md](docs/git-flow.md).

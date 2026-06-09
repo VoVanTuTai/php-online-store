@@ -39,6 +39,57 @@ database/       Database export placeholder
 
 ## Local Setup
 
+### Option 1: Docker
+
+1. Export your XAMPP MySQL database and place it at:
+
+```text
+database/songtai_shop.sql
+```
+
+2. Start the containers:
+
+```bash
+docker compose up -d --build
+```
+
+3. Open the customer site:
+
+```text
+http://localhost:8080/html/home.php
+```
+
+4. Open the admin area:
+
+```text
+http://localhost:8080/admin/admin.php
+```
+
+5. Open phpMyAdmin:
+
+```text
+http://localhost:8081
+```
+
+Docker database credentials:
+
+```text
+Host: db
+Database: songtai_shop
+Username: songtai_user
+Password: songtai_password
+Root password: root
+```
+
+If you add or replace `database/songtai_shop.sql` after MySQL has already initialized, reset the database volume:
+
+```bash
+docker compose down -v
+docker compose up -d --build
+```
+
+### Option 2: XAMPP/MAMP
+
 1. Place the project in your local PHP server directory, for example:
 
 ```text

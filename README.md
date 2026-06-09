@@ -14,6 +14,9 @@ The project focuses on practical e-commerce workflows: product browsing, authent
 
 ![Song Tai Shop store page](docs/screenshots/store.png)
 
+### Admin Dashboard
+<img width="2906" height="1662" alt="image" src="https://github.com/user-attachments/assets/08e6bb38-d018-4895-9918-606155d1ce46" />
+
 ## Tech Stack
 
 - PHP 8.2

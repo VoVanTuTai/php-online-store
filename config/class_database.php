@@ -3,7 +3,13 @@ class Database {
     private $conn;
 
     public function __construct() {
-        $config = require __DIR__ . '/config.php';
+        $configPath = __DIR__ . '/config.php';
+
+        if (!file_exists($configPath)) {
+            die("Missing config/config.php. Copy config/config.example.php to config/config.php and update your local database credentials.");
+        }
+
+        $config = require $configPath;
 
         // Bật chế độ báo lỗi chi tiết
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);

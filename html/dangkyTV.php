@@ -124,7 +124,7 @@
                                 $message = $registration->registerUser($_POST);
 
                                 // Hiển thị thông báo và điều hướng
-                                echo "<script>alert('$message');</script>";
+                                echo "<script>alert(" . json_encode($message, JSON_UNESCAPED_UNICODE) . ");</script>";
                             }
                         ?>
                     </form>

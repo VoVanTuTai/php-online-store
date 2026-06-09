@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../html/dangnhap.php");
-    exit();
-}
+require_once __DIR__ . "/../config/auth.php";
+require_admin();
 require_once '../config/class_database.php';
 
 $database = new Database();

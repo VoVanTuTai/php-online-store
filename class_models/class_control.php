@@ -1,6 +1,8 @@
 <?php
-session_start();
-require_once '../config/class_database.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once __DIR__ . '/../config/class_database.php';
 
 class control
 {
@@ -65,18 +67,6 @@ class control
                             <button type="submit" class="btn btn-success">Thêm</button>
                             <button type="reset" class="btn btn-secondary">Làm lại</button>
                         </div>
-                        <?php
-                            require_once "../class/class_database.php";
-                            require_once "../class/class_sanpham.php";
-
-                            $db = new Database("localhost", "root", "", "database_detai");
-                            $sanPham = new SanPham($db);
-
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                $message = $sanPham->insertSanPham($_POST, $_FILES);
-                                echo "<script>alert("$message");</script>";
-                            }
-                            ?>
                     </form>
                 </div>';
                 break;

@@ -1,5 +1,5 @@
 <?php
-require_once '../config/class_database.php'; // Nhúng file kết nối database
+require_once __DIR__ . '/../config/class_database.php'; // Nhúng file kết nối database
 
 class UserRegistration {
     private $conn;
@@ -62,12 +62,16 @@ class UserRegistration {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($user_id, $hashed_password, $phanquyen);
             $stmt->fetch();
-            if (password_verify($password, $hashed_password)) 
+            if (password_verify($password, $hashed_password))
             {
-                session_start();
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                session_regenerate_id(true);
                 // Lưu thông tin vào session
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['username'] = $name;
+                $_SESSION['phanquyen'] = (int)$phanquyen;
                 if ((int)$phanquyen === 1) {
                     header("Location: ../admin/admin.php");
                     exit();

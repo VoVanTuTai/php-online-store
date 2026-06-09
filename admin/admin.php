@@ -1,9 +1,6 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../html/dangnhap.php");
-    exit();
-}
+require_once __DIR__ . "/../config/auth.php";
+require_admin();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,7 +89,7 @@ if (!isset($_SESSION['user_id'])) {
 
                             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $message = $sanPham->insertSanPham($_POST, $_FILES);
-                                echo "<script>alert('$message');</script>";
+                                echo "<script>alert(" . json_encode($message, JSON_UNESCAPED_UNICODE) . ");</script>";
                             }
                             ?>
                     </form>
